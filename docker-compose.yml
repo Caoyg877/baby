@@ -1,0 +1,20 @@
+services:
+  baby-tracker:
+    build: .
+    container_name: baby-tracker
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - baby_data:/app/data
+      - /media/Photos:/app/media
+      - /data/backups:/app/backups
+    environment:
+      - PORT=3000
+      - DB_PATH=/app/data/baby.db
+      - MEDIA_PATH=/app/media
+      - BACKUP_PATH=/app/backups
+
+volumes:
+  baby_data:
+    driver: local
